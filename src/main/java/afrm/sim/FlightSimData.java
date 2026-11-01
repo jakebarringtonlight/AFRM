@@ -20,7 +20,7 @@ public class FlightSimData {
         double initialFuelKg, 
         List<Event> events){}
 
-    private static final AircraftModel AIRCRAFT_MODEL = AircraftModel.Aircraft();
+    private static final AircraftModel AIRCRAFT_MODEL = AircraftModel.defaultModel();
     
         public static final List<FlightScenario> SCENARIOS = List.of(
 
@@ -51,9 +51,6 @@ public class FlightSimData {
         for (FlightScenario scenario : SCENARIOS) {
             if (scenario.scenarioID().equals(scenarioID)) {
                 return scenario;
-            }
-            else {
-                return null;
             }
         }
         return null;

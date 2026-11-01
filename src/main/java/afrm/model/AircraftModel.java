@@ -12,8 +12,8 @@ public class AircraftModel {
     private final double maxRangeKm;
 
     public AircraftModel(String modelName, double maxFuelCapacityKg, double emptyWeightKg,
-                            double maxTakeoffWeightKg, double fuelConsumptionRateKgPerHour,
-                            double cruiseSpeedKmh, double maxRangeKm) {
+                         double maxTakeoffWeightKg, double fuelConsumptionRateKgPerHour,
+                         double cruiseSpeedKmh, double maxRangeKm) {
         this.modelName = modelName;
         this.maxFuelCapacityKg = maxFuelCapacityKg;
         this.emptyWeightKg = emptyWeightKg;
@@ -23,7 +23,7 @@ public class AircraftModel {
         this.maxRangeKm = maxRangeKm;
     }
 
-    public static AircraftModel Aircraft() {
+    public static AircraftModel defaultModel() {
         return new AircraftModel(
             Data.MODEL_NAME,
             Data.MAX_FUEL_CAPACITY_KG,
@@ -43,5 +43,3 @@ public class AircraftModel {
     public double cruiseSpeedKmh() { return cruiseSpeedKmh; }
     public double maxRangeKm() { return maxRangeKm; }
 }
-
-

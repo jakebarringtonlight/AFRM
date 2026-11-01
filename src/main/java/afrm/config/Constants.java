@@ -10,6 +10,6 @@ public final class Constants{
     public static final String CRITICAL_FUEL_WARNING_MESSAGE = "Warning: CRITICAL FUEL LEVEL";
     
     public static final double FUEL_REQ_MULTIPLIER = 1.5;
-    public static final double RESERVE_FRACTION = 0.1;
+    public static final double RESERVE_FRACTION = 0.05;
 
 }

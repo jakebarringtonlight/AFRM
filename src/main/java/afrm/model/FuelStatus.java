@@ -24,10 +24,7 @@ public class FuelStatus {
 
     public FuelState checkFuelStatus(double remainingDistance, double cruiseSpeed, double fuelConsumptionRate) {
 
-        double currentFuelLevel = this.currentFuelLevel;
-        double distance = remainingDistance;
-        double consumptionRate = fuelConsumptionRate;
-        double requiredFuel = afrm.calc.FuelCalculator.calculateRequiredFuel(distance, consumptionRate);
+        double requiredFuel = afrm.calc.FuelCalculator.calculateRequiredFuel(remainingDistance, fuelConsumptionRate);
         double reserveFuel = afrm.calc.FuelCalculator.calculateRequiredReserveFuel(requiredFuel);
         double totalRequiredFuel = requiredFuel + reserveFuel;
         
@@ -40,7 +37,7 @@ public class FuelStatus {
 
         if (currentFuelLevel < requiredFuel) {
          
-            return FuelState.INSUFFICIENT;
+            return FuelState.INSUFFICIENT_CAPACITY;
         }
         if (currentFuelLevel >= totalRequiredFuel) {
             return FuelState.NORMAL;
