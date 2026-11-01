@@ -14,35 +14,47 @@ public class FuelStatus {
 
     public boolean isFuelSufficient(AircraftModel aircraftModel, FlightPlan flightPlan) {
         double distance = flightPlan.getTotalDistanceKm();
+        double cruiseSpeed = aircraftModel.cruiseSpeedKmh();
         double consumptionRate = aircraftModel.fuelConsumptionRateKgPerHour();
-        double requiredFuel = afrm.calc.FuelCalculator.calculateRequiredFuel(distance, consumptionRate);
+        double requiredFuel = afrm.calc.FuelCalculator.calculateRequiredFuel(distance, cruiseSpeed, consumptionRate);
         double reserveFuel = afrm.calc.FuelCalculator.calculateRequiredReserveFuel(requiredFuel);
         double totalRequiredFuel = requiredFuel + reserveFuel;
 
         return currentFuelLevel >= totalRequiredFuel;
     }
 
-    public FuelState checkFuelStatus(double remainingDistance, double cruiseSpeed, double fuelConsumptionRate) {
+    public FuelState checkFuelStatus(double remainingDistance, double cruiseSpeed, double fuelConsumptionRate, double maxFuelCapacity) {
 
-        double requiredFuel = afrm.calc.FuelCalculator.calculateRequiredFuel(remainingDistance, fuelConsumptionRate);
-        double reserveFuel = afrm.calc.FuelCalculator.calculateRequiredReserveFuel(requiredFuel);
-        double totalRequiredFuel = requiredFuel + reserveFuel;
+        double remainingRequiredFuel = afrm.calc.FuelCalculator.calculateRequiredFuel(remainingDistance, cruiseSpeed, fuelConsumptionRate);
+        double reserveFuel = afrm.calc.FuelCalculator.calculateRequiredReserveFuel(remainingRequiredFuel);
+        double totalRequiredFuel = remainingRequiredFuel + reserveFuel;
         
-        if (currentFuelLevel < 0.1 * requiredFuel) {
-            return FuelState.LOW;    
+        if (currentFuelLevel < remainingRequiredFuel) {
+            return FuelState.CRITICAL;
         }
 
-        if (currentFuelLevel < 0.05 * requiredFuel) {
-            return FuelState.CRITICAL;}
+        if (currentFuelLevel < 0.1 * maxFuelCapacity) {
+                return FuelState.CRITICAL;
+        }
 
-        if (currentFuelLevel < requiredFuel) {
+        if (currentFuelLevel < remainingRequiredFuel + reserveFuel) {
+            return FuelState.LOW;
+        }
+
+        if (currentFuelLevel < 0.25 * maxFuelCapacity) {
+            return FuelState.LOW;
+        }
+
+        if (maxFuelCapacity < remainingRequiredFuel) {
          
             return FuelState.INSUFFICIENT_CAPACITY;
         }
+
         if (currentFuelLevel >= totalRequiredFuel) {
             return FuelState.NORMAL;
         }
-        return null;
+        
+        return FuelState.NORMAL;
     }    
 
 }

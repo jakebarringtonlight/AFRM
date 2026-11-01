@@ -1,5 +1,4 @@
 package afrm.ui;
-import java.util.List;
 
 import afrm.model.FlightSnapshot;
 import afrm.model.FuelState;
@@ -15,7 +14,12 @@ public class Logger {
     
     public void initialiseUI() {
         System.out.print("\033[2J\033[H");
-         System.out.println("========================================");
+
+        for (int i = 0; i < 10; i++) {
+            System.out.println();
+        }
+
+        System.out.print("\033[12;1H");
         System.out.println("LOGS:");
         System.out.flush();
     }
@@ -23,15 +27,16 @@ public class Logger {
 
     public void updateUI(FlightSnapshot snapshot) {
         System.out.print("\0337");
-        System.out.print("\033[H"); 
+        System.out.print("\033[1;1H");
 
         overwriteValue("========================================");
         overwriteValue("..................AFRM..................");
+        overwriteValue("Scenario: " + snapshot.scenarioID());
         overwriteValue("Fuel Status: " + colorText(snapshot.fuelState()) + snapshot.fuelState() + RESET);
         overwriteValue("Elapsed Flight Time: " + timeFormat(snapshot.elapsedTime()));
-        overwriteValue("Distance To Destination: " + snapshot.distanceToDestination() + " km");
-        overwriteValue("Fuel Remaining: " + snapshot.fuelRemaining() + " kg");
-        overwriteValue("Average Fuel Consumption: " + snapshot.averageFuelConsumptionPerHour() + " kg/h");
+        overwriteValue(String.format("Distance To Destination: %.2f km", snapshot.distanceToDestination()));
+        overwriteValue(String.format("Fuel Remaining: %.2f kg", snapshot.fuelRemaining()));
+        overwriteValue(String.format("Average Fuel Consumption: %.2f kg/h", snapshot.averageFuelConsumptionPerHour()));
         overwriteValue("Destination Airport: " + snapshot.destination());
         overwriteValue("========================================");
         
@@ -41,17 +46,17 @@ public class Logger {
     
     public String logInfo(String info, double elapsedTime){
         
-        return "INFO: " + info + ". Elapsed time: " + elapsedTime;
+        return "Elapsed Time: " + timeFormat(elapsedTime) + ". INFO: " + info;
     }
 
     public String logWarning(String warning, double elapsedTime){
         
-        return "WARNING: " + warning + ". Elapsed time: " + elapsedTime;
+        return "Elapsed Time: " + timeFormat(elapsedTime) + ". WARNING: " + warning;
     }
 
     public String logCritical(String critical, double elapsedTime){
         
-        return "CRITICAL: " + critical + ". Elapsed time: " + elapsedTime;
+        return "Elapsed Time: " + timeFormat(elapsedTime) + ". CRITICAL: " + critical;
     }
 
     public void printLog(String log){

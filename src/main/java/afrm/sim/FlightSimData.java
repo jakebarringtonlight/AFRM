@@ -26,21 +26,21 @@ public class FlightSimData {
 
         new FlightScenario("normal",
             AIRCRAFT_MODEL, new FlightPlan("BRS", "JFK", 3380.0),
-            13150.0, List.of()),
+            17000.0, List.of()),
 
         new FlightScenario("headwind",
             AIRCRAFT_MODEL, new FlightPlan("BRS", "JFK", 3380.0),
-            13150.0,
-            List.of(new Event(0.0, EventType.HEADWIND_KMH, 65.0))),
+            17000.0,
+            List.of(new Event(0.0, EventType.HEADWIND_KMH, 200.0))),
 
         new FlightScenario("leak",
             AIRCRAFT_MODEL, new FlightPlan("BRS", "JFK", 3380.0),
-            13150.0,
-            List.of(new Event(1.5, EventType.EXTRA_BURN_KG_PER_HOUR, 800.0))),
+            17000.0,
+            List.of(new Event(1.5, EventType.EXTRA_BURN_KG_PER_HOUR, 2400.0))),
 
         new FlightScenario("tight",
-            AIRCRAFT_MODEL, new FlightPlan("BRS", "MCO", 4250.0),
-            18500.0, List.of()),
+            AIRCRAFT_MODEL, new FlightPlan("BRS", "MCO", 3900.0),
+            18500.0, List.of(new Event(0.0, EventType.HEADWIND_KMH, 180.0))),
 
         new FlightScenario("infeasible",
             AIRCRAFT_MODEL, new FlightPlan("BRS", "SYD", 10600.0),

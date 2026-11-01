@@ -14,13 +14,19 @@ public final class FuelCalculator {
         return distance / cruiseSpeedKmh;
     }
 
-    public static double calculateRequiredFuel(double distance, double consumtptionRate){
-        if (distance <= 0 || consumtptionRate <= 0) {
-            return 0;
-        }
+    public static double calculateRequiredFuel(
+        double distance,
+        double cruiseSpeed,
+        double consumptionRate) {
 
-        return calculateFlightTime(distance, consumtptionRate) * consumtptionRate * Constants.FUEL_REQ_MULTIPLIER;
+    if (distance <= 0 || cruiseSpeed <= 0 || consumptionRate <= 0) {
+        return 0;
     }
+
+    double flightTime = distance / cruiseSpeed;
+
+    return flightTime * consumptionRate;
+}
     
     public static double calculateRequiredReserveFuel(double requiredFuel) {
         if (requiredFuel <= 0) {

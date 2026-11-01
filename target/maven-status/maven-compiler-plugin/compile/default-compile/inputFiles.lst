@@ -1,13 +1,12 @@
 /Users/jacobbarrington-light/Desktop/AFRM/src/main/java/afrm/AFRM.java
 /Users/jacobbarrington-light/Desktop/AFRM/src/main/java/afrm/calc/FuelCalculator.java
-/Users/jacobbarrington-light/Desktop/AFRM/src/main/java/afrm/calc/FuelRequirements.java
 /Users/jacobbarrington-light/Desktop/AFRM/src/main/java/afrm/config/Constants.java
 /Users/jacobbarrington-light/Desktop/AFRM/src/main/java/afrm/config/Data.java
 /Users/jacobbarrington-light/Desktop/AFRM/src/main/java/afrm/model/AircraftModel.java
 /Users/jacobbarrington-light/Desktop/AFRM/src/main/java/afrm/model/FlightPlan.java
+/Users/jacobbarrington-light/Desktop/AFRM/src/main/java/afrm/model/FlightSnapshot.java
 /Users/jacobbarrington-light/Desktop/AFRM/src/main/java/afrm/model/FuelState.java
 /Users/jacobbarrington-light/Desktop/AFRM/src/main/java/afrm/model/FuelStatus.java
-/Users/jacobbarrington-light/Desktop/AFRM/src/main/java/afrm/model/hardware/FuelSensor.java
 /Users/jacobbarrington-light/Desktop/AFRM/src/main/java/afrm/sim/FlightSimData.java
 /Users/jacobbarrington-light/Desktop/AFRM/src/main/java/afrm/sim/Simulator.java
 /Users/jacobbarrington-light/Desktop/AFRM/src/main/java/afrm/ui/Logger.java
