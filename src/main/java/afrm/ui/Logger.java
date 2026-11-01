@@ -10,17 +10,17 @@ public class Logger {
         cockpitDisplay(logs);
     }
 
-    public String logInfo(String info, String elapsedTime){
+    public String logInfo(String info, double elapsedTime){
         
         return "INFO: " + info + ". Elapsed time: " + elapsedTime;
     }
 
-    public String logWarning(String warning, String elapsedTime){
+    public String logWarning(String warning, double elapsedTime){
         
         return "WARNING: " + warning + ". Elapsed time: " + elapsedTime;
     }
 
-    public String logCritical(String critical, String elapsedTime){
+    public String logCritical(String critical, double elapsedTime){
         
         return "CRITICAL: " + critical + ". Elapsed time: " + elapsedTime;
     }
