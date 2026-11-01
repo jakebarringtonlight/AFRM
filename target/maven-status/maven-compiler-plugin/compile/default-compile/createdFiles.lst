@@ -1,0 +1,15 @@
+afrm/AFRM.class
+afrm/calc/FuelRequirements.class
+afrm/model/FuelStatus.class
+afrm/sim/FlightSimData$EventType.class
+afrm/model/hardware/FuelSensor.class
+afrm/sim/FlightSimData$FlightScenario.class
+afrm/model/FlightPlan.class
+afrm/config/Constants.class
+afrm/ui/Logger.class
+afrm/config/Data.class
+afrm/sim/FlightSimData.class
+afrm/model/AircraftModel.class
+afrm/model/FuelState.class
+afrm/sim/FlightSimData$Event.class
+afrm/calc/FuelCalculator.class
