@@ -29,6 +29,12 @@ public class FuelStatus {
         double reserveFuel = afrm.calc.FuelCalculator.calculateRequiredReserveFuel(remainingRequiredFuel);
         double totalRequiredFuel = remainingRequiredFuel + reserveFuel;
         
+        
+        if (maxFuelCapacity < remainingRequiredFuel) {
+         
+            return FuelState.INSUFFICIENT_CAPACITY;
+        }
+
         if (currentFuelLevel < remainingRequiredFuel) {
             return FuelState.CRITICAL;
         }
@@ -45,11 +51,7 @@ public class FuelStatus {
             return FuelState.LOW;
         }
 
-        if (maxFuelCapacity < remainingRequiredFuel) {
-         
-            return FuelState.INSUFFICIENT_CAPACITY;
-        }
-
+        
         if (currentFuelLevel >= totalRequiredFuel) {
             return FuelState.NORMAL;
         }
