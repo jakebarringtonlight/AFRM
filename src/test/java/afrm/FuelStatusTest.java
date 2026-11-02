@@ -1,8 +1,8 @@
 
 package afrm;
+
 import afrm.model.FuelStatus;
 import afrm.model.FuelState;
-
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -14,7 +14,6 @@ class FuelStatusTest {
     @Test
     void sufficientFuelReturnsNormal() {
         FuelStatus fuelStatus = new FuelStatus(15000);
-
         assertEquals(FuelState.NORMAL,
                 fuelStatus.checkFuelStatus(1000, 833.5, 2500, MAX_FUEL_CAPACITY));
     }
@@ -22,7 +21,6 @@ class FuelStatusTest {
     @Test
     void lowFuelReturnsLow() {
         FuelStatus fuelStatus = new FuelStatus(4000);
-
         assertEquals(FuelState.LOW,
                 fuelStatus.checkFuelStatus(100, 833.5, 2500, MAX_FUEL_CAPACITY));
     }
@@ -30,7 +28,6 @@ class FuelStatusTest {
     @Test
     void criticalFuelReturnsCritical() {
         FuelStatus fuelStatus = new FuelStatus(1000);
-
         assertEquals(FuelState.CRITICAL,
                 fuelStatus.checkFuelStatus(100, 833.5, 2500, MAX_FUEL_CAPACITY));
     }
@@ -38,9 +35,43 @@ class FuelStatusTest {
     @Test
     void insufficientCapacityReturnsInsufficientCapacity() {
         FuelStatus fuelStatus = new FuelStatus(19000);
-
         assertEquals(FuelState.INSUFFICIENT_CAPACITY,
                 fuelStatus.checkFuelStatus(8000, 833.5, 2500, MAX_FUEL_CAPACITY));
     }
-}
 
+    @Test
+    void zeroFuelReturnsCritical() {
+        FuelStatus fuelStatus = new FuelStatus(0);
+        assertEquals(FuelState.CRITICAL,
+                fuelStatus.checkFuelStatus(100, 833.5, 2500, MAX_FUEL_CAPACITY));
+    }
+
+    @Test
+    void fuelBelowReserveRequirementReturnsLow() {
+        // Enough fuel for the route, but not enough for the 5% reserve.
+        FuelStatus fuelStatus = new FuelStatus(6100);
+        assertEquals(FuelState.LOW,
+                fuelStatus.checkFuelStatus(2000, 833.5, 2500, MAX_FUEL_CAPACITY));
+    }
+
+    @Test
+    void fuelBelowTenPercentReturnsCritical() {
+        FuelStatus fuelStatus = new FuelStatus(1800);
+        assertEquals(FuelState.CRITICAL,
+                fuelStatus.checkFuelStatus(100, 833.5, 2500, MAX_FUEL_CAPACITY));
+    }
+
+    @Test
+    void fuelAtTwentyFivePercentReturnsNormal() {
+        FuelStatus fuelStatus = new FuelStatus(4750);
+        assertEquals(FuelState.NORMAL,
+                fuelStatus.checkFuelStatus(1000, 833.5, 2500, MAX_FUEL_CAPACITY));
+    }
+
+    @Test
+    void zeroRemainingDistanceReturnsNormalWithSufficientFuel() {
+        FuelStatus fuelStatus = new FuelStatus(15000);
+        assertEquals(FuelState.NORMAL,
+                fuelStatus.checkFuelStatus(0, 833.5, 2500, MAX_FUEL_CAPACITY));
+    }
+}

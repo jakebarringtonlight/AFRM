@@ -51,7 +51,6 @@ public class FuelStatus {
             return FuelState.LOW;
         }
 
-        
         if (currentFuelLevel >= totalRequiredFuel) {
             return FuelState.NORMAL;
         }
