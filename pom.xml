@@ -9,7 +9,7 @@
   <version>0.1.0-SNAPSHOT</version>
   <packaging>jar</packaging>
   <name>AFRM - Aircraft Fuel and Range Management</name>
-  <description>Prototype cockpit-style fuel and range simulation (not for operational use)</description>
+  <description>Prototype Aircraft Fuel and Range Management simulation (not for operational use)</description>
 
   <properties>
     <maven.compiler.release>25</maven.compiler.release>

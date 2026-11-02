@@ -13,6 +13,8 @@ public class Simulator {
     
     public static void runSimulation(FlightSimData.FlightScenario scenario) {
         
+
+        // Initialising all the variables from the constants and FlightScenario.
         Logger logger = new Logger();
         
         AircraftModel aircraftModel = scenario.aircraftModel();
@@ -34,6 +36,8 @@ public class Simulator {
     
         FuelStatus fuelStatus = new FuelStatus(currentFuelLevel);
 
+
+        // Check to ensure fuel level is valid and sufficient to make it to destination.
         if (currentFuelLevel > aircraftModel.maxFuelCapacityKg()
         || !fuelStatus.isFuelSufficient(aircraftModel, flightPlan)) {
         logger.updateUI(new FlightSnapshot(scenario.scenarioID(), elapsedTime, remainingDistance, currentFuelLevel,
@@ -44,7 +48,7 @@ public class Simulator {
 
         FuelState fuelState = fuelStatus.checkFuelStatus(remainingDistance, cruiseSpeed, fuelConsumptionRate, aircraftModel.maxFuelCapacityKg());
 
-
+        // Loop to simulate the time passed in the flight. 
         while (remainingDistance > 0 && currentFuelLevel > 0) {   
             
             double actualSpeed = Math.max(1.0, cruiseSpeed - eventValue(scenario, EventType.HEADWIND_KMH, elapsedTime));
@@ -53,7 +57,7 @@ public class Simulator {
             fuelStatus = new FuelStatus(currentFuelLevel);
             fuelState = fuelStatus.checkFuelStatus(remainingDistance, actualSpeed, actualFuelConsumptionRate, aircraftModel.maxFuelCapacityKg());
 
-
+            // If the fuelState changes then a new log is printed.
             if (fuelState != lastFuelState) {
 
             if (fuelState == FuelState.LOW) {
@@ -69,8 +73,9 @@ public class Simulator {
                 logger.printLog(logger.logCritical("Insufficient fuel to complete flight", elapsedTime));
             }
             }
-
             lastFuelState = fuelState;
+
+            // Simulating the 'real time' flight value updates.
             double averageFuelConsumption = elapsedTime > 0 ? fuelConsumed / elapsedTime : fuelConsumptionRate;
             logger.updateUI(new FlightSnapshot(scenario.scenarioID(), elapsedTime, remainingDistance, currentFuelLevel,
                     averageFuelConsumption, destination, fuelState));
@@ -88,6 +93,8 @@ public class Simulator {
             remainingDistance = 0.0;
             }
             elapsedTime += flightTime;
+
+
             try {
                 Thread.sleep(50);
             } catch (InterruptedException e) {
@@ -102,7 +109,8 @@ public class Simulator {
         double finalAverageConsumption = elapsedTime > 0
                 ? fuelConsumed / elapsedTime
                 : fuelConsumptionRate;
-
+            
+        //Final UI Values.
         logger.updateUI(new FlightSnapshot(
                 scenario.scenarioID(),
                 elapsedTime,
@@ -115,6 +123,7 @@ public class Simulator {
     
     }
 
+    // Method to simulate the 'real time' flight value updates.
     private static double eventValue(FlightScenario scenario, EventType type, double elapsedTime) {
         double value = 0.0;
         for (FlightSimData.Event event : scenario.events()) {

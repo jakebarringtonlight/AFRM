@@ -7,11 +7,13 @@ public class FuelStatus {
     public FuelStatus(double currentFuelLevel) {
         this.currentFuelLevel = currentFuelLevel;
     }
-
+    
+    // Getter for currentFuelLevel value.
     public double getCurrentFuelLevel() {
         return currentFuelLevel;
     }
 
+    // Boolean check to see if initial fuel provided will be enough to reach the destination.
     public boolean isFuelSufficient(AircraftModel aircraftModel, FlightPlan flightPlan) {
         double distance = flightPlan.getTotalDistanceKm();
         double cruiseSpeed = aircraftModel.cruiseSpeedKmh();
@@ -23,6 +25,7 @@ public class FuelStatus {
         return currentFuelLevel >= totalRequiredFuel;
     }
 
+    // FuelState check to set the FuelState for the UI based on the current fuel levels and remaining flight variables.
     public FuelState checkFuelStatus(double remainingDistance, double cruiseSpeed, double fuelConsumptionRate, double maxFuelCapacity) {
 
         double remainingRequiredFuel = afrm.calc.FuelCalculator.calculateRequiredFuel(remainingDistance, cruiseSpeed, fuelConsumptionRate);

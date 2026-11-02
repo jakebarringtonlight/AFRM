@@ -8,6 +8,7 @@ public final class AFRM {
     
     private AFRM() {}
 
+    // Main class to run simulation.
     public static void main(String[] args) {
 
         for (FlightScenario scenario : FlightSimData.SCENARIOS) {
