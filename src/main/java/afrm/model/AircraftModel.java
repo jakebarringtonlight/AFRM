@@ -23,6 +23,7 @@ public class AircraftModel {
         this.maxRangeKm = maxRangeKm;
     }
 
+    // Method to create a default AircraftModel instance using constants from the Data class
     public static AircraftModel defaultModel() {
         return new AircraftModel(
             Data.MODEL_NAME,
@@ -35,6 +36,7 @@ public class AircraftModel {
         );
     }
 
+    // Getter methods for the AircraftModel properties
     public String modelName() { return modelName; }
     public double maxFuelCapacityKg() { return maxFuelCapacityKg; }
     public double emptyWeightKg() { return emptyWeightKg; }

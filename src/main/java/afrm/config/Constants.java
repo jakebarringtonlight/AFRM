@@ -4,6 +4,8 @@ public final class Constants{
     
     private Constants() {}
 
+    // Constants for fuel status messages and reserve fraction
+
     public static final String INSUFFICIENT_FUEL_CAPACITY_WARNING_MESSAGE = "Warning: Insufficient fuel capacity for the flight plan.";
     public static final String NORMAL_FUEL_STATUS_MESSAGE = "Fuel Status: NORMAL";
     public static final String LOW_FUEL_WARNING_MESSAGE = "Warning: LOW FUEL";

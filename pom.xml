@@ -36,8 +36,6 @@
         <configuration>
           <compilerArgs>
             <arg>-Xlint:all</arg>
-            <!-- Enable once the code compiles warning-free:
-            <arg>-Werror</arg> -->
           </compilerArgs>
         </configuration>
       </plugin>
