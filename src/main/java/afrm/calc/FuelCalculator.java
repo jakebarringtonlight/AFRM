@@ -38,12 +38,12 @@ public final class FuelCalculator {
         return requiredFuel * Constants.RESERVE_FRACTION;
     }
     
-    // Calculate the estimated fuel consumption in kilograms given distance in kilometers and fuel consumption rate in kilograms per hour.
-    public static double calculateEstimatedFuelConsumption(double distance, double consumptionRate) {
-        if (distance <= 0 || consumptionRate <= 0) {
+    // Calculate the estimated fuel consumption in kilograms given the estimated flight time and fuel consumption rate in kilograms per hour.
+    public static double calculateEstimatedFuelConsumption(double flightTime, double consumptionRate) {
+        if (flightTime <= 0 || consumptionRate <= 0) {
             return 0;
         }
-        return distance * consumptionRate;
+        return flightTime * consumptionRate;
     }
 
     // Calculate the remaining possible flight time in hours given current fuel level in kilograms and fuel consumption rate in kilograms per hour.
