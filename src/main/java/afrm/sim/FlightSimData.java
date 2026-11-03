@@ -21,8 +21,9 @@ public class FlightSimData {
         List<Event> events){}
 
     private static final AircraftModel AIRCRAFT_MODEL = AircraftModel.defaultModel();
-    
-        public static final List<FlightScenario> SCENARIOS = List.of(
+
+    // List of scenarios for simulation.
+    public static final List<FlightScenario> SCENARIOS = List.of(
 
         new FlightScenario("normal",
             AIRCRAFT_MODEL, new FlightPlan("BRS", "JFK", 3380.0),
@@ -47,6 +48,7 @@ public class FlightSimData {
             19000.0, List.of())
     );
 
+    // Getter to get the current FlightScenario.
     public static FlightScenario getScenario(String scenarioID) {
         for (FlightScenario scenario : SCENARIOS) {
             if (scenario.scenarioID().equals(scenarioID)) {
